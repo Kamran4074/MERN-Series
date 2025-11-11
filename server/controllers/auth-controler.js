@@ -25,7 +25,7 @@ const register= async(req,res)=>{
     // const hash_password=await bcrypt.hash(password,saltrounds);
 
 
-    const data=await User.create({username,email,phone,password})
+    const data=await User.create({username,email,phone,password:{select:false}});
     try {
         res
             .status(200).json({msg:data})
