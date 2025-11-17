@@ -1,5 +1,7 @@
 const mongoose=require('mongoose');
 const bcrypt=require("bcryptjs");
+const jwt= require("jsonwebtoken");
+const express = require('express');
 
 
 const userSchema= new mongoose.Schema({
@@ -37,9 +39,28 @@ userSchema.pre('save',async function(next){
         user.password=hash_password;
         next();
     } catch (error) {
-        next(error);
+        console.log("Encrypting password"+error);
     }
-})
-const User=new mongoose.model("User",userSchema)
+});
 
+
+
+//method to generate token
+userSchema.methods.generateToken = async function(){
+    try {
+        return jwt.sign({
+            userId:this._id.toString(),
+            email:this.email,
+            isAdmin:this.isAdmin
+        },
+        process.env.JWT_SECRET_KEY,{
+            expiresIn:"30d"
+        }
+    )
+    } catch (error) {
+        console.log("Fail to generate token"+error)
+    }
+}
+
+const User=new mongoose.model("User",userSchema)
 module.exports=User;

@@ -6,6 +6,7 @@ const authrouter=require("../controllers/auth-controler")
 
 router.route("/").get(authrouter.home);
 router.route("/register").post(authrouter.register)
+router.route("/login").post(authrouter.login)
 
 module.exports=router;
 //we can also use router.route() method beause it helps in chaining multiple http methods.

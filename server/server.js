@@ -6,7 +6,6 @@ const connectdb=require("./utils/db")
 
 //middleware
 app.use(express.json())
-
 app.use("/api/auth",router)
 
 
