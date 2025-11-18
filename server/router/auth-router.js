@@ -2,12 +2,12 @@ const express=require('express')
 const router=express.Router();
 // const {home,regester}=require("../controllers/auth-controler") or
 const authrouter=require("../controllers/auth-controler")
-const signupSchema=require("../validator/auth-validator")
+const {signupSchema,loginSchema}=require("../validator/auth-validator")
 const {validate}=require("../middlewares/validate-middleware")
 
 router.route("/").get(authrouter.home);
 router.route("/register").post(validate(signupSchema),authrouter.register) //validation middleware added here
-router.route("/login").post(authrouter.login)
+router.route("/login").post(validate(loginSchema),authrouter.login)
 
 module.exports=router;
 
