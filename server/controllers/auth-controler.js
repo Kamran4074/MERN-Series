@@ -1,4 +1,4 @@
-const User=require("../models/user-model");
+const {User,userSchema}=require("../models/user-model");
 const bcrypt=require("bcryptjs");   
 
 //Home route controller

@@ -1,7 +1,7 @@
 const {z} = require("zod");
 
-//create schema for registration validation
 
+//create schema for registration validation
 const signupSchema =z.object({
     username: z
     .string({required_error:"Username is required"})
@@ -27,6 +27,8 @@ const signupSchema =z.object({
     .max(100,"Password must be at most 100 characters long"),
 });
 
+
+//create schema for login validation
 const loginSchema=z.object({
     email:z
     .string({required_error:"Email is required"})
