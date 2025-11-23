@@ -16,6 +16,10 @@ export const Register=()=>{
             [name]:value
         })
     }
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        console.log(user);
+    }
     return(
         <>
         <section>
@@ -36,7 +40,7 @@ export const Register=()=>{
                             <h1 className="main-heading mb-3">Registration form</h1>
                             <br />
 
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div>
                                     <label htmlFor="username">UserName</label>
                                     <input 
