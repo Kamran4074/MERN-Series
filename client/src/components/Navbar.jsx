@@ -21,6 +21,9 @@ export const Navbar=()=>{
                             <NavLink to="/contact">Contact</NavLink>
                         </li>
                         <li>
+                            <NavLink to="/service">Service</NavLink>
+                        </li>
+                        <li>
                             <NavLink to="/register">Register</NavLink>
                         </li>
                         <li>
