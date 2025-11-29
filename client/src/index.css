@@ -28,8 +28,8 @@ body {
 }
 
 h1 {
-  font-size: 5.4rem;
-  line-height: 1.1;
+  font-size: 4rem;
+  line-height: 1.2;
   font-weight: bold;
 }
 
@@ -66,14 +66,15 @@ li {
 /*? layout Rule  */
 
 .container {
-  max-width: 140rem;
-  padding: 4rem 2.4rem;
+  max-width: 120rem;
+  padding: 3rem 2.4rem;
   margin: 0 auto;
+  width: 100%;
 }
 
 .grid {
   display: grid;
-  gap: 6.4rem;
+  gap: 3.2rem;
 }
 
 .grid-two-cols {
@@ -174,7 +175,7 @@ a.active {
     display: flex;
     justify-content: center;
     & img {
-      width: 80%;
+      width: 70%;
       height: auto;
     }
   }
@@ -222,18 +223,21 @@ a.active {
     padding: 0;
 
     & h1 {
-      margin-bottom: 3.2rem;
+      margin-bottom: 2rem;
+      font-size: 3.6rem;
     }
   }
   & .container {
-    padding-top: 3.2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
   & .contact-img {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     & img {
-      width: 80%;
+      width: 100%;
+      max-width: 35rem;
       height: auto;
     }
   }
@@ -242,18 +246,45 @@ a.active {
     & form {
       display: flex;
       flex-direction: column;
-      gap: 3.2rem;
+      gap: 2rem;
     }
     & label {
       display: block;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.8rem;
       text-transform: capitalize;
+      font-size: 1.6rem;
     }
 
     & input,
     textarea {
-      width: 80%;
-      padding: 0.4rem 0.6rem;
+      width: 100%;
+      max-width: 50rem;
+      padding: 1rem 1.2rem;
+      font-size: 1.6rem;
+      border: 0.1rem solid #ccc;
+      border-radius: 0.5rem;
+      background-color: #f9f9f9;
+    }
+
+    & textarea {
+      resize: vertical;
+      min-height: 12rem;
+    }
+
+    & button {
+      width: fit-content;
+      margin-top: 1rem;
+    }
+  }
+
+  & .mb-3 {
+    margin-top: 4rem;
+    margin-bottom: 0;
+    padding: 0 2.4rem;
+    
+    & iframe {
+      border-radius: 1rem;
+      box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
     }
   }
 }
@@ -341,13 +372,14 @@ a.active {
 
 .section-registration {
   padding: 0 3.2rem;
+
   & .container {
     /* background-color: #fff; */
     padding-top: 3.2rem;
     align-items: center;
 
     & img {
-      width: 50%;
+      width: 70%;
       height: auto;
     }
   }
@@ -359,8 +391,8 @@ a.active {
       text-transform: capitalize;
     }
     & input {
-      width: 80%;
-      padding: 0.6rem 0.6rem;
+      width: 100%;
+      padding: 0.3rem 1rem;
     }
 
     & button {

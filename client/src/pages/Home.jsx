@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Analytics } from "../components/Analytics";
 
 export const Home=()=>{
     return(
@@ -42,7 +43,9 @@ export const Home=()=>{
 
                         {/* second section */}
 
-            <section className="section-analytics">
+            <Analytics />
+            
+            {/* <section className="section-analytics">
                 <div className="container grid grid-four-cols">
                     <div className="div1">
                         <h2>500+</h2>
@@ -61,7 +64,7 @@ export const Home=()=>{
                         <p>Years of Experience</p>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
                         {/* third section */}
 

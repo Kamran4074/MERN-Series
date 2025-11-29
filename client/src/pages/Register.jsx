@@ -36,7 +36,7 @@ export const Register=()=>{
                             />
                         </div>
 
-                        <div className="regestration-form">
+                        <div className="registration-form">
                             <h1 className="main-heading mb-3">Registration form</h1>
                             <br />
 

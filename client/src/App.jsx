@@ -6,6 +6,8 @@ import { Service } from './pages/Service';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import{ Navbar } from './components/Navbar'
+import { Footer } from './components/Footer';
+import { Error } from './pages/Error';
 const App = () => {
   return (
     <>
@@ -18,7 +20,11 @@ const App = () => {
       <Route path='/service' element={<Service/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
+      {/* Astric(*) in a code mean if user is accessing any another page that is not in website */}
+      {/* imlementing error page */}
+      <Route path='*' element={<Error/>}/>
     </Routes>
+    <Footer/>
     </BrowserRouter>
     </>
   )

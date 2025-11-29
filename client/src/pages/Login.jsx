@@ -21,9 +21,9 @@ export const Login=()=>{
     return(
         <section>
             <main>
-                <div className="section-login">
+                <div className="section-registration">
                     <div className="container grid grid-two-cols">
-                        <div className="login image">
+                        <div className="login-image">
                             <img src="/images/login.png" 
                             alt="login illustration" 
                             width={400}
@@ -32,7 +32,7 @@ export const Login=()=>{
                         </div>
 
                         <div className="login-form">
-                            <h1 className="login-form-heading">Login</h1>
+                            <h1 className="main-heading mb-3">Login</h1>
                             <br />
 
                             <form onSubmit={handleSubmit}>
