@@ -1,10 +1,18 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../store/auth"
+const URL=`http://localhost:5000/api/auth/login`
 
 export const Login=()=>{
     const[user,setUser]=useState({
         email:"",
         password:""
     })
+
+    //use for navigating after state change
+    const navigate=useNavigate();
+    const {storeTokenInLS}=useAuth(); //soreTokenInLS is defined in Authjsx
+
     const handleInput=(e)=>{
         let name=e.target.name;
         let value=e.target.value;
@@ -14,9 +22,46 @@ export const Login=()=>{
             [name]:value
         })
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit= async (e)=>{
         e.preventDefault();
         console.log(user);
+
+        //connecting with backend
+        try {
+            const response= await fetch(URL, {
+                method:"POST",
+                headers:{
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify(user)
+            });
+
+            if(response.ok){
+
+                //storing token
+                alert("Login successful!");
+                const res_data = await response.json();
+
+                // Store token in localStorage
+                storeTokenInLS(res_data.token) //we can write this or below line
+                // localStorage.setItem("token", data.token); 
+
+                // Redirect or update state here
+                setUser({
+                    email:"",
+                    password:""
+                })
+
+                navigate("/") //from here we can go to dashboard
+
+            } else {
+                alert(data.message || "Login failed");
+            }
+
+        } catch (error) {
+            console.error("Login error:", error);
+            alert("Something went wrong. Please try again.");
+        }
     }
     return(
         <section>

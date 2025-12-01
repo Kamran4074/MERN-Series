@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useNavigate} from "react-router-dom"
+import { useAuth } from "../store/auth"
 
 export const Register=()=>{
     const[user,setUser]=useState({
@@ -7,6 +9,12 @@ export const Register=()=>{
         phone:"",
         password:""
     })
+
+
+    const navigate = useNavigate();
+    const storeTokenInLS = useAuth()
+
+    //handeling the input value
     const handleInput=(e)=>{
         let name=e.target.name;
         let value=e.target.value;
@@ -16,10 +24,44 @@ export const Register=()=>{
             [name]:value
         })
     }
-    const handleSubmit=(e)=>{
+
+    
+    const handleSubmit= async(e)=>{
         e.preventDefault();
         console.log(user);
-    }
+
+        //conneting frontent with backend
+        try {
+            const response= await fetch(`http://localhost:5000/api/auth/register`,{
+            method:"POST",
+            headers:{
+                'Content-Type':"application/json",
+            },
+            body:JSON.stringify(user),
+        });
+        //response.ok/response.status===201 etc
+        if(response.ok){
+            const res_data= await response.json();
+            console.log("res from server", res_data);
+
+            //store data in local storage provided by server
+            storeTokenInLS(res_data.token); 
+
+            // make all field emplty
+            setUser({
+            username:"",
+            email:"",
+            phone:"",
+            password:""
+            })
+            navigate("/login")
+        }
+        console.log(response);
+        } catch (error) {
+            console.log("Registration error",error);
+        }
+    };
+
     return(
         <>
         <section>
