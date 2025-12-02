@@ -1,25 +1,19 @@
-const express=require('express')
+const express=require('express');
 const router=express.Router();
 // const {home,regester}=require("../controllers/auth-controler") or
-const authrouter=require("../controllers/auth-controler")
-const {signupSchema,loginSchema}=require("../validator/auth-validator")
-const {validate}=require("../middlewares/validate-middleware")
+const authrouter=require("../controllers/auth-controler");
+const {signupSchema,loginSchema}=require("../validator/auth-validator");
+const {validate}=require("../middlewares/validate-middleware");
+const authMiddleware=require("../middlewares/auth-middleware");
+
 
 router.route("/").get(authrouter.home);
-router.route("/register").post(validate(signupSchema),authrouter.register) //validation middleware added here
-router.route("/login").post(validate(loginSchema),authrouter.login)
+//validation middleware added here
+router.route("/register").post(validate(signupSchema),authrouter.register);
+
+router.route("/login").post(validate(loginSchema),authrouter.login);
+
+//getting data of user to show on contact and auto fill email and user name in contact field
+router.route("/user").get(authMiddleware,authrouter.user);
 
 module.exports=router;
-
-
-//we can also use router.route() method beause it helps in chaining multiple http methods.
-
-// router.route("/register").get((req,res)=>{
-//     res
-//         .status(200)
-//         .send("Register Route using route()");
-// })
-
-// app.get("/home",(req,res)=>{
-//     res.status(200).send("Server is running");
-// })

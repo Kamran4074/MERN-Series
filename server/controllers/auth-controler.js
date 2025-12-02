@@ -1,5 +1,4 @@
-const {User,userSchema}=require("../models/user-model");
-const bcrypt=require("bcryptjs");   
+const {User}=require("../models/user-model");   
 
 //Home route controller
 const home= async(req,res)=>{
@@ -69,4 +68,19 @@ const login=async(req,res)=>{
         res.status(500).json("Login Auth-controler "+error);
     }
 }
-module.exports={home,register,login};
+
+//user logic to send user data
+const user = async(req,res) =>{
+  try {
+    const userData=req.user;
+    console.log(userData);
+    return res.status(200).json({userData})
+    
+  } catch (error) {
+    console.log("User logic error in auth-controller",error);
+  }
+}
+
+
+
+module.exports={home,register,login,user};

@@ -1,4 +1,4 @@
-const {Contact,contactSchema}=require("../models/contact-models"); //import Contact and contactSchema models 
+const {Contact}=require("../models/contact-models"); //import Contact and contactSchema models 
 
 const contactForm=async(req,res)=>{
     try {
