@@ -36,26 +36,27 @@ export const Login=()=>{
                 body: JSON.stringify(user)
             });
 
-            if(response.ok){
+            const res_data = await response.json();
+            console.log("Login response:", res_data);
 
+            if(response.ok){
                 //storing token
                 alert("Login successful!");
-                const res_data = await response.json();
 
                 // Store token in localStorage
-                storeTokenInLS(res_data.token) //we can write this or below line
-                // localStorage.setItem("token", data.token); 
+                storeTokenInLS(res_data.token);
 
-                // Redirect or update state here
+                // Clear form
                 setUser({
                     email:"",
                     password:""
-                })
+                });
 
-                navigate("/") //from here we can go to dashboard
+                // Redirect to home
+                navigate("/");
 
             } else {
-                alert(data.message || "Login failed");
+                alert(res_data.message || "Invalid credentials");
             }
 
         } catch (error) {

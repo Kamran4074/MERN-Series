@@ -1,6 +1,9 @@
 import { Analytics } from "../components/Analytics"
+import { useAuth } from "../store/auth"
 
 export const About = () => {
+    const { user } = useAuth();
+    
     return (
         <>
             <main>
@@ -9,6 +12,7 @@ export const About = () => {
                 <section className="section-hero">
                     <div className="container grid grid-two-cols">
                         <div className="hero-content">
+                            <p>Hi {user ? user.username : "Guest"}!</p>
                             <p>Welcome to Kamronix</p>
                             <h1>Why Choose Us?</h1>
                             <p>

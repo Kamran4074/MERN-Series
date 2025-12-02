@@ -1,98 +1,140 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useAuth } from "../store/auth";
+import { useEffect } from "react";
 
-export const Contact=()=>{
+const defaultContactFormData = {
+  username: "",
+  email: "",
+  message: "",
+};
 
-    const[contact,setContact]=useState({
-        username:"",
-        email:"",
-        message:""
-    })
+export const Contact = () => {
+  const [contact, setContact] = useState(defaultContactFormData);
+  const [userDataLoaded, setUserDataLoaded] = useState(false);
 
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        console.log(contact);
+  const { user, API } = useAuth();
+  
+  useEffect(() => {
+    // Only set user data once when it first loads
+    if (user && !userDataLoaded) {
+      setContact({
+        username: user.username,
+        email: user.email,
+        message: "",
+      });
+      setUserDataLoaded(true);
     }
-    const handleInput=(e)=>{
-        const name=e.target.name;
-        const value=e.target.value;
+  }, [user, userDataLoaded]);
 
-        setContact({
-            ...contact,
-            [name]:value,
+  // lets tackle our handleInput
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-        })
+    setContact({
+      ...contact,
+      [name]: value,
+    });
+  };
+
+  // handle fomr getFormSubmissionInfo
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API}/api/form/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+      });
+
+      if (response.ok) {
+        setContact(defaultContactFormData);
+        const data = await response.json();
+        console.log(data);
+        alert("Message send successfully");
+      }
+    } catch (error) {
+      alert("Message not send");
+      console.log(error);
     }
-    return(
-        <section className="section-contact">
-            <div className="contact-content container">
-                <h1 className="main-heading">Contact Us</h1>
-            </div>
+  };
 
-            {/* contact page main */}
-            <div className="container grid grid-two-cols">
-                <div className="contact-img">
-                    <img src="/images/support.png" alt="img" />
-                </div>
+  return (
+    <>
+      <section className="section-contact">
+        <div className="contact-content container">
+          <h1 className="main-heading">contact us</h1>
+        </div>
+        {/* contact page main  */}
+        <div className="container grid grid-two-cols">
+          <div className="contact-img">
+            <img src="/images/support.png" alt="we are always ready to help" />
+          </div>
 
-                {/* actual content */}
-                <section className="section-form">
-                    <form onSubmit={handleSubmit} >
-                        <div>
-                            <label htmlFor="username">username</label>
-                            <input 
-                            type="text" 
-                            name="username" 
-                            id="username" 
-                            autoComplete="off"
-                            onChange={handleInput}
-                            value={contact.username}
-                            required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="email">email</label>
-                            <input 
-                            type="text" 
-                            name="email" 
-                            id="email" 
-                            autoComplete="off"
-                            onChange={handleInput}
-                            value={contact.email}
-                            required
-                            />
-                        </div>
+          {/* contact form content actual  */}
+          <section className="section-form">
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="username">username</label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  autoComplete="off"
+                  value={contact.username}
+                  onChange={handleInput}
+                  required
+                />
+              </div>
 
-                        <div>
-                            <label htmlFor="message">message</label>
-                            <textarea 
-                            name="message" 
-                            id="message"
-                            cols="30"
-                            rows="10"
-                            autoComplete="off"
-                            onChange={handleInput}
-                            value={contact.message}
-                            required
-                            ></textarea>
-                        </div>
-                        <div>
-                            <button type="submit">submit</button>
-                        </div>
-                    </form>
-                </section>
-            </div>
-            <section className="mb-3">
-                <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.030759492136!2d77.5024442098552!3d28.478620290954417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cea6553e386df%3A0x22b36be7a1c39b70!2sBeta%20Plaza%2C%20Block%20B%2C%20Beta%20I%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201310!5e0!3m2!1sen!2sin!4v1764357309488!5m2!1sen!2sin" 
-                width="100%" 
-                height="450" 
-                style={{ border: 0 }} 
-                allowFullScreen={true}
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps Location"
-                ></iframe>
-            </section>
+              <div>
+                <label htmlFor="email">email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  autoComplete="off"
+                  value={contact.email}
+                  onChange={handleInput}
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message">message</label>
+                <textarea
+                  name="message"
+                  id="message"
+                  autoComplete="off"
+                  value={contact.message}
+                  onChange={handleInput}
+                  required
+                  cols="30"
+                  rows="6"
+                ></textarea>
+              </div>
+
+              <div>
+                <button type="submit">submit</button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <section className="mb-3">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2613173278896!2d73.91411937501422!3d18.562253982539413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c147b8b3a3bf%3A0x6f7fdcc8e4d6c77e!2sPhoenix%20Marketcity%20Pune!5e0!3m2!1sen!2sin!4v1697604225432!5m2!1sen!2sin"
+            width="100%"
+            height="450"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </section>
-    )
-}
+      </section>
+    </>
+  );
+};

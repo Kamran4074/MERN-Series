@@ -264,6 +264,7 @@ a.active {
       border: 0.1rem solid #ccc;
       border-radius: 0.5rem;
       background-color: #f9f9f9;
+      color: #242424;
     }
 
     & textarea {
