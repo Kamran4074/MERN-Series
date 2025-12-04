@@ -23,7 +23,7 @@ export const Navbar=()=>{
                             <NavLink to="/contact">Contact</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/service">Service</NavLink>
+                            <NavLink to="/service">Services</NavLink>
                         </li>
 
                     {/* if isLoggedIn is true then only it will show logout else login and register */}

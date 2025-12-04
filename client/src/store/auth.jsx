@@ -20,14 +20,15 @@ export const AuthProvider = ({ children }) => {
   let isLoggedIn = !!token;
   console.log("isLoggedIN ", isLoggedIn);
 
+
   // tackling the logout functionality
   const LogoutUser = () => {
     setToken("");
     return localStorage.removeItem("token");
   };
 
-  // JWT AUTHENTICATION - to get the currently loggedIN user data
 
+  // JWT AUTHENTICATION - to get the currently loggedIN user data
   const userAuthentication = async () => {
     try {
       setIsLoading(true);
@@ -59,23 +60,23 @@ export const AuthProvider = ({ children }) => {
   // to fetch the services data from the database
   const getServices = async () => {
     // TODO: Implement service route in backend
-    // try {
-    //   const response = await fetch(`${API}/api/data/service`, {
-    //     method: "GET",
-    //   });
+    try {
+      const response = await fetch(`${API}/api/data/service`, {
+        method: "GET",
+      });
 
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     console.log(data.msg);
-    //     setServices(data.msg);
-    //   }
-    // } catch (error) {
-    //   console.log(`services frontend error: ${error}`);
-    // }
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.msg);
+        setServices(data.msg);
+      }
+    } catch (error) {
+      console.log(`services frontend error: ${error}`);
+    }
   };
 
   useEffect(() => {
-    // getServices(); // Commented out until backend route is created
+    getServices(); // Commented out until backend route is created
     if(token) {
       userAuthentication();
     } else {
