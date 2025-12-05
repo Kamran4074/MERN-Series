@@ -1,10 +1,14 @@
-require("dotenv").config();
+require("dotenv").config(); //for database
 const express = require('express');
-const cors = require("cors");
+const cors = require("cors"); //cors for cross origin resource sharing
+
 const app = express(); //create express application
+
 const authRoute = require("./router/auth-router");
 const contactRoute = require("./router/contact-router");//import contact router
 const serviceRoute = require("./router/service-router.js");
+const adminRoute = require("./router/admin-router.js");
+
 const connectdb = require("./utils/db");
 const {errorMiddleware} = require("./middlewares/error-middleware.js");
 
@@ -19,8 +23,11 @@ app.use(cors(corsOptions));
 app.use(express.json());//middleware to parse json data in request body 
 
 app.use("/api/auth",authRoute); //auth routes are defined in auth-router.js
-app.use("/api/form",contactRoute);  //contact routes are defined in contact-router.js
-app.use("/api/data",serviceRoute)
+app.use("/api/form",contactRoute);  //contact routes is defined in contact-router.js
+app.use("/api/data",serviceRoute); //service route is define in service-route.js
+
+//lets define admin route
+app.use("/api/admin",adminRoute); 
 
 //we have to use error middleware at the end after all routes where connection is establishing
 app.use(errorMiddleware);

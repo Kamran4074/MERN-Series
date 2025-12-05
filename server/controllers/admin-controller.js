@@ -1,0 +1,38 @@
+const {User} = require("../models/user-model");
+const {Contact}= require("../models/contact-models")
+
+//---------------------
+//to get user data to admin
+//---------------------
+const getAllUsers=async(req,res,next)=>{
+    try {
+        const users = await User.find({},{password:0}); 
+        //{},{password:0} bkz we dont want password
+        console.log(users);
+        if(!users || users.length===0){
+            return res.status(404).json({message:"No User Found"});
+        }
+        return res.status(200).json(users);
+    } catch (error) {
+        next(error);
+    }
+}
+
+//----------------------------
+//to get contact data to admin
+//----------------------------
+const getAllContacts=async(req,res,next)=>{
+    try {
+        const contacts = await Contact.find();
+        console.log(contacts);
+
+        if(!contacts || contacts.length===0){
+            return res.status(404).json({message:"No Contact Found"})
+        }
+        return res.status(200).json(contacts);
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports={getAllUsers,getAllContacts};

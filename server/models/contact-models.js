@@ -10,5 +10,6 @@ const contactSchema=new Schema({
 
 //create model or collection in database
 const Contact = mongoose.model("Contact",contactSchema); 
+
 //model name is Contact and schema is contactSchema
 module.exports={Contact,contactSchema};
