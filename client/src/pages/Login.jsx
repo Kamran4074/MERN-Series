@@ -56,7 +56,8 @@ export const Login=()=>{
                 navigate("/");
 
             } else {
-                alert(res_data.message || "Invalid credentials");
+                alert(res_data.extraDetails ? res_data.extraDetails:res_data.message);
+                console.log("Invalid Crential");
             }
 
         } catch (error) {

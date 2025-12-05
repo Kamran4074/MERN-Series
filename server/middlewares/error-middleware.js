@@ -6,4 +6,5 @@ const extraDetails = err.extraDetails || "error from backend middleware";
 return res.status(status).json({message,extraDetails})
 }
 
-module.exports={errorMiddleware};
+module.exports={errorMiddleware};  
+//errorMiddleware only validate email,name,phone etc only checek and send data on frontend

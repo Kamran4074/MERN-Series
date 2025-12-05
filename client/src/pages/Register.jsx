@@ -39,11 +39,13 @@ export const Register=()=>{
             },
             body:JSON.stringify(user),
         });
+
+
+        const res_data= await response.json();
+        console.log("res from server", res_data.message);
+
         //response.ok/response.status===201 etc
         if(response.ok){
-            const res_data= await response.json();
-            console.log("res from server", res_data);
-
             //store data in local storage provided by server
             storeTokenInLS(res_data.token); 
 
@@ -55,8 +57,9 @@ export const Register=()=>{
             password:""
             })
             navigate("/login")
+        }else{
+            alert(res_data.extraDetails ? res_data.extraDetails:res_data.message);
         }
-        console.log(response);
         } catch (error) {
             console.log("Registration error",error);
         }

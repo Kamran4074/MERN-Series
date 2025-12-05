@@ -12,8 +12,8 @@ const validate=(schema)=>async(req,res,next)=>{
         const extraDetails=err.issues[0].path[0] + " " + err.issues[0].message; 
         //path[0] is the field that is invalid and message is the error message
 
-        const error={
-            status,
+        const error={ 
+            status, 
             message,
             extraDetails
         }
@@ -25,3 +25,5 @@ const validate=(schema)=>async(req,res,next)=>{
 };
 
 module.exports={validate};
+
+//all err caught here and that come form auth-validator and go to error middleware

@@ -1,6 +1,9 @@
 const {User}=require("../models/user-model");   
 
+//-----------------------------
 //Home route controller
+//-----------------------------
+
 const home= async(req,res)=>{
     try {
         res
@@ -11,14 +14,17 @@ const home= async(req,res)=>{
     }
 }
 
+//-----------------------------
 //User registration controller
+//-----------------------------
+
 const register = async (req, res) => {
   try {
     const { username, email, phone, password } = req.body;
 
     const userExist = await User.findOne({ email });
     if (userExist) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const userCreated = await User.create({
@@ -40,8 +46,10 @@ const register = async (req, res) => {
 };
 
 
-
+//-----------------------------
 //User login controller
+//-----------------------------
+
 const login=async(req,res)=>{
     try {
         const{email,password}=req.body;
@@ -68,8 +76,10 @@ const login=async(req,res)=>{
         res.status(500).json("Login Auth-controler "+error);
     }
 }
-
+//-----------------------------
 //user logic to send user data
+//-----------------------------
+
 const user = async(req,res) =>{
   try {
     const userData=req.user;
