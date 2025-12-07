@@ -26,12 +26,12 @@ const authMiddleware = async (req,res,next)=>{
 
         console.log("User data:", userData);
 
-        // Attach user data to request
-        req.user = userData;
-        req.token = token;
-        req.userID = userData._id;
+        // Put user info IN THE BACKPACK
+        req.user = userData;        // "Hey, put this user info in the backpack"
+        req.token = token;          // "Also put the token in there"
+        req.userID = userData._id;  // "And put the ID too"
 
-        next();
+        next(); // Pass the backpack to the next person
     } catch (error) {
         return res.status(401).json({msg:"Unauthorized. Invalid token."});
     }
