@@ -1,9 +1,9 @@
 const {User} = require("../models/user-model");
 const {Contact}= require("../models/contact-models")
 
-//---------------------
+//-------------------------
 //to get user data to admin
-//---------------------
+//--------------------------
 const getAllUsers=async(req,res,next)=>{
     try {
         const users = await User.find({},{password:0}); 
@@ -15,6 +15,20 @@ const getAllUsers=async(req,res,next)=>{
         return res.status(200).json(users);
     } catch (error) {
         next(error);
+    }
+}
+
+//----------------------------------------
+//to get single user data to admin(update)
+//-----------------------------------------
+const getUserById=async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const data = await User.findOne({_id:id},{password:0}) 
+        // _id:id this mean if mongodb (_id) is match with our given(id) then delete it
+        return res.status(200).json(data)
+    } catch (error) {
+        next("deleteUserById function error in admin-controller" `${error}`);
     }
 }
 //----------------------------
@@ -48,4 +62,4 @@ const getAllContacts=async(req,res,next)=>{
     }
 }
 
-module.exports={getAllUsers,getAllContacts,deleteUserById};
+module.exports={getAllUsers,getAllContacts,deleteUserById,getUserById};
