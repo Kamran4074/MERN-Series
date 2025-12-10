@@ -9,6 +9,9 @@ import{ Navbar } from './components/Navbar'
 import { Footer } from './components/Footer';
 import { Error } from './pages/Error';
 import { Logout } from './pages/Logout';
+import { AdminLayout } from './components/layouts/Admin-layout';
+import { AdminContact } from './pages/Admin-Contact';
+import { AdminUser } from './pages/Admin-User';
 const App = () => {
   return (
     <>
@@ -23,8 +26,12 @@ const App = () => {
       <Route path='/register' element={<Register/>} />
       <Route path='/logout' element={<Logout/>} />
       {/* Astric(*) in a code mean if user is accessing any another page that is not in website */}
-      {/* imlementing error page */}
+      {/* implementing error page */}
       <Route path='*' element={<Error/>}/>
+      <Route path='/admin' element={<AdminLayout/>}>
+        <Route path='contacts' element={<AdminContact/>}/>
+        <Route path='users' element={<AdminUser/>}/>
+      </Route>
     </Routes>
     <Footer/>
     </BrowserRouter>
