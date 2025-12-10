@@ -13,7 +13,7 @@ export const Register=()=>{
 
 
     const navigate = useNavigate();
-    const storeTokenInLS = useAuth()
+    const {storeTokenInLS} = useAuth()
 
     //handeling the input value
     const handleInput=(e)=>{

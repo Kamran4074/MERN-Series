@@ -9,7 +9,16 @@ const router= express.Router();
 
 // router.route("/users").get(getAllUsers);
 // router.route("/contact").get(getAllContacts);
-router.route("/users").get(authMiddleware,adminMiddleware,adminController.getAllUsers);
-router.route("/contact").get(authMiddleware,adminMiddleware,adminController.getAllContacts);
-
+router
+    .route("/users")
+    .get(authMiddleware,adminMiddleware,adminController.getAllUsers);
+router
+    .route("/users/delete/:id")
+    .delete(authMiddleware,adminMiddleware,adminController.deleteUserById);
+router
+    .route("/contact")
+    .get(authMiddleware,adminMiddleware,adminController.getAllContacts);
+//authMiddleware to see weather user is loggedin or not
+//adminMiddleware to see weather he is admin or not
+//and third controller is a finction that is defined i  controller to do the work we want
 module.exports = router;

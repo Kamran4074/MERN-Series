@@ -22,9 +22,32 @@ export const AdminUser = ()=>{
             console.log(error);
         }
     }
+
+    //function to delete user on delet button
+    const deleteUser=async (id) =>{
+        try {
+            const response = await fetch(`http://localhost:5000/api/admin/users/delete/${id}`,
+                {
+                    method : "DELETE",
+                    headers :{
+                        Authorization: authorizationToken
+                    }
+                }
+            );
+            const data = await response.json();
+            console.log(`users after delete:`, data);      
+            if(response.ok){
+                getAllUsersData();
+            }      
+        } catch (error) {
+            console.log(`error in deleteUser function in Admin-User in pages ${error}`);
+        }
+    }
+
     useEffect(()=>{
         getAllUsersData();
     },[])
+
     return <>
     <section className="admin-user-section">
         <div className="container">
@@ -50,7 +73,11 @@ export const AdminUser = ()=>{
                                 <td>{crrUser.email}</td>
                                 <td>{crrUser.phone}</td>
                                 <td>Edit</td>
-                                <td>Delete</td>
+                                <td>
+                                    <button onClick={()=>deleteUser(crrUser._id)}>
+                                        Delete
+                                    </button>
+                                </td>
                             </tr>
                         )
                     })}

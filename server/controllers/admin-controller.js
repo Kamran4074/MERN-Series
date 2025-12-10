@@ -17,6 +17,19 @@ const getAllUsers=async(req,res,next)=>{
         next(error);
     }
 }
+//----------------------------
+//Delete user by admin
+//----------------------------
+const deleteUserById= async(req,res)=>{
+    try {
+        const id = req.params.id;
+        await User.deleteOne({_id:id}) 
+        // _id:id this mean if mongodb (_id) is match with our given(id) then delete it
+        return res.status(200).json({message:"User deleted successfully"})
+    } catch (error) {
+        next("deleteUserById function error in admin-controller" `${error}`);
+    }
+}
 
 //----------------------------
 //to get contact data to admin
@@ -35,4 +48,4 @@ const getAllContacts=async(req,res,next)=>{
     }
 }
 
-module.exports={getAllUsers,getAllContacts};
+module.exports={getAllUsers,getAllContacts,deleteUserById};
