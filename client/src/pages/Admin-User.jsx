@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 export const AdminUser = ()=>{
     const [users, setUsers] = useState([]);
-    const {authorizationToken} = useAuth();
+    const {authorizationToken,API} = useAuth();
 
     const getAllUsersData = async() =>{
         try {
-            const response = await fetch('http://localhost:5000/api/admin/users',
+            const response = await fetch(`${API}/api/admin/users`,
                 {
                     method : "GET",
                     headers :{
@@ -27,7 +27,7 @@ export const AdminUser = ()=>{
     //function to delete user on delet button
     const deleteUser=async (id) =>{
         try {
-            const response = await fetch(`http://localhost:5000/api/admin/users/delete/${id}`,
+            const response = await fetch(`${API}/api/admin/users/delete/${id}`,
                 {
                     method : "DELETE",
                     headers :{
@@ -36,7 +36,7 @@ export const AdminUser = ()=>{
                 }
             );
             const data = await response.json();
-            console.log(`users after delete:`, data);      
+            console.log(`users after delete: ${data}`);      
             if(response.ok){
                 getAllUsersData();
             }      

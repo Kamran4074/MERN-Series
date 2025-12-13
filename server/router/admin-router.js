@@ -24,6 +24,9 @@ router
 router
     .route("/contact")
     .get(authMiddleware,adminMiddleware,adminController.getAllContacts);
+router
+    .route("/contact/delete/:id")
+    .delete(authMiddleware,adminMiddleware,adminController.deleteContactById);
 //authMiddleware to see weather user is loggedin or not
 //adminMiddleware to see weather he is admin or not
 //and third controller is a finction that is defined i  controller to do the work we want

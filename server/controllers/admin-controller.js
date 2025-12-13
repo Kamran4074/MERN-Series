@@ -36,7 +36,7 @@ const getUserById=async(req,res)=>{
 //---------------------
 const updateUserById =async(req,res)=>{
     try {
-        const id = req.params._id; //kiss id ko update karna hai
+        const id = req.params.id; //kiss id ko update karna hai
         const updatedUserData= req.body; //usme se kiss data se update karna hai
 
         const updatedData = await User.updateOne(
@@ -81,4 +81,17 @@ const getAllContacts=async(req,res,next)=>{
     }
 }
 
-module.exports={getAllUsers,getAllContacts,deleteUserById,getUserById,updateUserById};
+//------------------------
+//Delete contact by admin
+//------------------------
+const deleteContactById= async(req,res)=>{
+    try {
+        const id = req.params.id;
+        await Contact.deleteOne({_id:id}) 
+        return res.status(200).json({message:"Contact deleted successfully"})
+    } catch (error) {
+        next("deleteContactById function error in admin-controller" `${error}`);
+    }
+}
+
+module.exports={getAllUsers,getAllContacts,deleteUserById,getUserById,updateUserById,deleteContactById};
