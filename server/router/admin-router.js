@@ -10,11 +10,14 @@ const router= express.Router();
 // router.route("/users").get(getAllUsers);
 // router.route("/contact").get(getAllContacts);
 router
-    .route("/users")
+    .route("/users") //get all user
     .get(authMiddleware,adminMiddleware,adminController.getAllUsers);
 router
-    .route("/users/:id")
+    .route("/users/:id") //get single user
     .get(authMiddleware,adminMiddleware,adminController.getUserById);
+router
+    .route("/users/update/:id")
+    .patch(authMiddleware,adminMiddleware,adminController.updateUserById);
 router
     .route("/users/delete/:id")
     .delete(authMiddleware,adminMiddleware,adminController.deleteUserById);

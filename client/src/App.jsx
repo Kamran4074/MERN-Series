@@ -12,6 +12,7 @@ import { Logout } from './pages/Logout';
 import { AdminLayout } from './components/layouts/Admin-layout';
 import { AdminContact } from './pages/Admin-Contact';
 import { AdminUser } from './pages/Admin-User';
+import { AdminUpdate } from './pages/Admin-Update';
 const App = () => {
   return (
     <>
@@ -31,6 +32,7 @@ const App = () => {
       <Route path='/admin' element={<AdminLayout/>}>
         <Route path='contacts' element={<AdminContact/>}/>
         <Route path='users' element={<AdminUser/>}/>
+        <Route path='users/:id/edit' element={<AdminUpdate/>}/>
       </Route>
     </Routes>
     <Footer/>

@@ -31,9 +31,28 @@ const getUserById=async(req,res)=>{
         next("deleteUserById function error in admin-controller" `${error}`);
     }
 }
-//----------------------------
+//---------------------
+//update user by admin
+//---------------------
+const updateUserById =async(req,res)=>{
+    try {
+        const id = req.params._id; //kiss id ko update karna hai
+        const updatedUserData= req.body; //usme se kiss data se update karna hai
+
+        const updatedData = await User.updateOne(
+            {_id:id},
+            {
+                $set:updatedUserData
+            })
+            return res.status(200).json(updatedData);
+    } catch (error) {
+        next("updateUserById function error in admin-controller" `${error}`)
+    }
+}
+
+//---------------------
 //Delete user by admin
-//----------------------------
+//---------------------
 const deleteUserById= async(req,res)=>{
     try {
         const id = req.params.id;
@@ -62,4 +81,4 @@ const getAllContacts=async(req,res,next)=>{
     }
 }
 
-module.exports={getAllUsers,getAllContacts,deleteUserById,getUserById};
+module.exports={getAllUsers,getAllContacts,deleteUserById,getUserById,updateUserById};

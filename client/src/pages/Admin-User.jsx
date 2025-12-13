@@ -74,7 +74,7 @@ export const AdminUser = ()=>{
                                 <td>{crrUser.email}</td>
                                 <td>{crrUser.phone}</td>
                                 <td>
-                                    <Link to={`/admin/user/${crrUser._id}/edit`}> Edit </Link>
+                                    <Link to={`/admin/users/${crrUser._id}/edit`}> Edit </Link>
                                 </td>
                                 <td>
                                     <button onClick={()=>deleteUser(crrUser._id)}>
@@ -84,7 +84,6 @@ export const AdminUser = ()=>{
                             </tr>
                         )
                     })}
-                    
                 </tbody>
             </table>
         </div>
