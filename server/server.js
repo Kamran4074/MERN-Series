@@ -13,7 +13,7 @@ const connectdb = require("./utils/db");
 const {errorMiddleware} = require("./middlewares/error-middleware.js");
 
 const corsOptions = {
-    origin:"http://localhost:5173",
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     methods:"GET,POST,PUT,DELETE,PATCH,HEAD",
     credentials:true,
 }
@@ -32,7 +32,7 @@ app.use("/api/admin",adminRoute);
 //we have to use error middleware at the end after all routes where connection is establishing
 app.use(errorMiddleware);
     
-const PORT=5000;
+const PORT = process.env.PORT || 5000;
 connectdb().then(()=>{
     app.listen(PORT,()=>{
         console.log(`Server is running at port: ${PORT}`);
