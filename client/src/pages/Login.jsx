@@ -2,7 +2,6 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../store/auth"
 import { toast } from "react-toastify"
-const URL=`http://localhost:5000/api/auth/login`
 
 
 export const Login=()=>{
@@ -13,7 +12,7 @@ export const Login=()=>{
 
     //use for navigating after state change
     const navigate=useNavigate();
-    const {storeTokenInLS}=useAuth(); //soreTokenInLS is defined in Authjsx
+    const {storeTokenInLS, API}=useAuth(); //soreTokenInLS is defined in Authjsx
 
     const handleInput=(e)=>{
         let name=e.target.name;
@@ -30,7 +29,7 @@ export const Login=()=>{
 
         //connecting with backend
         try {
-            const response= await fetch(URL, {
+            const response= await fetch(`${API}/api/auth/login`, {
                 method:"POST",
                 headers:{
                     'Content-Type': "application/json",
