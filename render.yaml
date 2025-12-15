@@ -1,10 +1,11 @@
 services:
   # Backend API Service
   - type: web
-    name: your-app-backend
+    name: servicehub-backend
     env: node
-    buildCommand: cd server && npm install
-    startCommand: cd server && npm start
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -13,14 +14,15 @@ services:
       - key: JWT_SECRET_KEY
         sync: false  # Set this in Render dashboard
       - key: CLIENT_URL
-        value: https://your-app-frontend.onrender.com  # Update with your frontend URL
+        value: https://servicehub-frontend.onrender.com
 
   # Frontend Static Site
   - type: web
-    name: your-app-frontend
+    name: servicehub-frontend
     env: static
-    buildCommand: cd client && npm install && npm run build
-    staticPublishPath: ./client/dist
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
-        value: https://your-app-backend.onrender.com  # Update with your backend URL
+        value: https://servicehub-backend.onrender.com
