@@ -49,10 +49,12 @@ export const AuthProvider = ({ children }) => {
         // Clear invalid token
         setToken("");
         localStorage.removeItem("token");
+        setUser(null);
         setIsLoading(false);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
+      setUser(null);
       setIsLoading(false);
     }
   };

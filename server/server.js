@@ -20,7 +20,21 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //middleware
-app.use(express.json());//middleware to parse json data in request body 
+app.use(express.json());//middleware to parse json data in request body
+
+// Root route for API
+app.get("/", (req, res) => {
+    res.json({
+        message: "ServiceHub API is running!",
+        frontend: process.env.CLIENT_URL || "Frontend URL not set",
+        endpoints: {
+            auth: "/api/auth",
+            contact: "/api/form", 
+            services: "/api/data",
+            admin: "/api/admin"
+        }
+    });
+}); 
 
 app.use("/api/auth",authRoute); //auth routes are defined in auth-router.js
 app.use("/api/form",contactRoute);  //contact routes is defined in contact-router.js

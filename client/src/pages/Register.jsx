@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate} from "react-router-dom"
 import { useAuth } from "../store/auth"
 import { toast } from "react-toastify"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 export const Register=()=>{
     const[user,setUser]=useState({
@@ -10,6 +11,8 @@ export const Register=()=>{
         phone:"",
         password:""
     })
+
+    const [showPassword, setShowPassword] = useState(false)
 
 
     const navigate = useNavigate();
@@ -129,16 +132,26 @@ export const Register=()=>{
                                 </div>
                                 <div>
                                     <label htmlFor="password">Password</label>
-                                    <input 
-                                    type="text" 
-                                    name="password" 
-                                    placeholder="Enter password"
-                                    id="password" 
-                                    required
-                                    autoComplete="off"
-                                    value={user.password}
-                                    onChange={handleInput}
-                                    />
+                                    <div className="password-input-container">
+                                        <input 
+                                        type={showPassword ? "text" : "password"}
+                                        name="password" 
+                                        placeholder="Enter password"
+                                        id="password" 
+                                        required
+                                        autoComplete="off"
+                                        value={user.password}
+                                        onChange={handleInput}
+                                        />
+                                        <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="password-toggle-btn"
+                                        aria-label={showPassword ? "Hide password" : "Show password"}
+                                        >
+                                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                        </button>
+                                    </div>
                                 </div>
                                 <br />
 

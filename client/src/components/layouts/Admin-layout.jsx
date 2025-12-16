@@ -3,12 +3,14 @@ import { FaUser, FaPhone, FaServicestack, FaHome } from "react-icons/fa";
 import { useAuth } from '../../store/auth';
 
 export const AdminLayout=()=>{
-    const { user ,isLoading} = useAuth();
+    const { user, isLoading } = useAuth();
 
     if(isLoading){
         return <h1>Loading...</h1>
     }
-    if(!user.isAdmin){
+    
+    // Check if user exists and is admin
+    if(!user || !user.isAdmin){
         return <Navigate to="/"/>
     }
     return (

@@ -1,16 +1,44 @@
+import { useState } from "react"
 import { useAuth } from "../store/auth"
+import { FaSearch } from "react-icons/fa"
 
 export const Service=()=>{
     const{ services } = useAuth();
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // Filter services based on search term
+    const filteredServices = services.filter(service =>
+        service.service.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        service.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        service.provider.toLowerCase().includes(searchTerm.toLowerCase())
+    );
     return(
         <section className="section-services">  
             <div className="container">
                 <h1 className="main-heading">Services</h1>
             </div>
+            
+            {/* Search Section */}
+            <div className="container">
+                <div className="search-container">
+                    <div className="search-input-container">
+                        <FaSearch className="search-icon" />
+                        <input
+                            type="text"
+                            placeholder="Search services..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="search-input"
+                        />
+                    </div>
+                </div>
+            </div>
+
             <div className="container grid grid-three-cols">
 
                 {
-                    services.map((crrElem,index)=>{
+                    filteredServices.length > 0 ? (
+                        filteredServices.map((crrElem,index)=>{
                         const{price,description,provider,service}=crrElem;
                         return <div className="card" key={index}>
                             <div className="card-img">
@@ -32,6 +60,11 @@ export const Service=()=>{
                             </div>
                         </div>
                     })
+                ) : (
+                    <div className="no-services-found">
+                        <p>No services found matching your search.</p>
+                    </div>
+                )
                 }
                 
             </div>
