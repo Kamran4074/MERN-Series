@@ -14,7 +14,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 50%;
 }
 
 /*? base style */
@@ -28,7 +28,7 @@ body {
 }
 
 h1 {
-  font-size: 5.4rem;
+  font-size: 4.2rem;
   line-height: 1.1;
   font-weight: bold;
 }
@@ -76,14 +76,14 @@ li {
 /*? layout Rule  */
 
 .container {
-  max-width: 140rem;
-  padding: 4rem 2.4rem;
+  max-width: 120rem;
+  padding: 3rem 2rem;
   margin: 0 auto;
 }
 
 .grid {
   display: grid;
-  gap: 6.4rem;
+  gap: 4rem;
 }
 
 .grid-two-cols {
@@ -120,6 +120,30 @@ button {
   -o-transition: border-color 0.3s;
 }
 
+button:focus,
+button:focus-visible {
+  outline: none !important;
+}
+
+/* Specific override for password toggle button */
+.password-toggle-btn:focus,
+.password-toggle-btn:focus-visible,
+.password-toggle-btn:active,
+.password-toggle-btn:hover {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove all possible focus indicators for password toggle only */
+.password-toggle-btn:focus {
+  outline: none !important;
+}
+
+.password-toggle-btn:focus-visible {
+  outline: none !important;
+}
+
 .secondary-btn {
   background-color: transparent;
   box-shadow: inset 0 0 0 0.2rem var(--btn-color);
@@ -142,6 +166,7 @@ a.active {
 .main-heading {
   position: relative;
   text-transform: capitalize;
+  font-size: 3.2rem;
 
   &::after {
     content: "";
@@ -149,7 +174,7 @@ a.active {
     left: 0;
     bottom: 0;
     width: 50%;
-    height: 0.5rem;
+    height: 0.4rem;
     background-color: var(--btn-color);
   }
 }
@@ -298,6 +323,7 @@ a.active {
   );
   background-size: 500%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.25);
   position: relative;
@@ -354,38 +380,55 @@ a.active {
 ** -------------------------  */
 
 .section-registration {
-  padding: 0 3.2rem;
+  padding: 0 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 
   & .container {
-    /* background-color: #fff; */
-    padding-top: 3.2rem;
+    padding-top: 2rem;
     align-items: center;
+    max-width: 100rem;
 
     & img {
-      width: 80%;
+      width: 70%;
       height: auto;
+      max-width: 35rem;
     }
   }
 
   & .registration-form {
     & label {
       display: block;
-      margin: 2.4rem 0 0.8rem 0;
+      margin: 1.8rem 0 0.6rem 0;
       text-transform: capitalize;
+      font-size: 1.4rem;
     }
     & input {
       width: 80%;
-      padding: 0.6rem 0.6rem;
+      padding: 0.8rem 0.8rem;
+      font-size: 1.4rem;
+      max-width: 35rem;
     }
 
     & button {
-      margin-top: 3.2rem;
+      margin-top: 2rem;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.4rem;
     }
 
     /* Override input styles for password container */
+    & .password-input-container {
+      width: 80% !important;
+      max-width: 35rem !important;
+      display: block !important;
+      position: relative !important;
+    }
+    
     & .password-input-container input {
       width: 100% !important;
-      padding: 0.6rem 4rem 0.6rem 0.6rem !important;
+      padding: 0.8rem 4.5rem 0.8rem 0.8rem !important;
+      box-sizing: border-box !important;
     }
   }
 }
@@ -393,51 +436,70 @@ a.active {
 /* Password toggle button styles */
 .password-input-container {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 80%;
+  max-width: 35rem;
   
   & input {
     width: 100%;
-    padding: 0.6rem 4rem 0.6rem 0.6rem;
+    padding: 0.8rem 4.5rem 0.8rem 0.8rem;
     border: 0.1rem solid #ccc;
     border-radius: 0.4rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    box-sizing: border-box;
   }
 }
 
 .password-toggle-btn {
   position: absolute;
-  right: 0.8rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
+  right: 1.5rem;
+  top: 1rem;
+  transform: none;
+  background: transparent;
+  border: 0;
   cursor: pointer;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--btn-color);
   padding: 0.4rem;
   transition: all 0.3s ease;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   margin: 0;
   border-radius: 0.3rem;
-  min-width: 3rem;
-  min-height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  z-index: 100;
+  outline: 0 !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-tap-highlight-color: transparent !important;
   
   &:hover {
     color: var(--dark-color);
     background-color: rgba(100, 108, 255, 0.1);
-    transform: translateY(-50%) scale(1.05);
+    transform: scale(1.05);
   }
   
-  &:focus {
-    outline: none;
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    outline: 0 !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    outline-color: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
     background-color: rgba(100, 108, 255, 0.1);
   }
   
   &:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: scale(0.95);
     background-color: rgba(100, 108, 255, 0.2);
   }
 }
@@ -479,63 +541,6 @@ a.active {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 3.2rem;
-  }
-}
-
-/* Search container styles */
-.search-container {
-  display: flex;
-  justify-content: center;
-  margin: 3rem 0;
-}
-
-.search-input-container {
-  position: relative;
-  width: 100%;
-  max-width: 50rem;
-}
-
-.search-input {
-  width: 100%;
-  padding: 1.2rem 1.5rem 1.2rem 5rem;
-  font-size: 1.6rem;
-  border: 0.2rem solid var(--helper-color);
-  border-radius: 3rem;
-  background-color: var(--bg-color);
-  color: var(--dark-color);
-  transition: all 0.3s ease;
-  
-  &:focus {
-    outline: none;
-    border-color: var(--btn-color);
-    box-shadow: 0 0 0 0.3rem rgba(100, 108, 255, 0.1);
-  }
-  
-  &::placeholder {
-    color: #999;
-    font-style: italic;
-  }
-}
-
-.search-icon {
-  position: absolute;
-  left: 1.8rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.8rem;
-  color: var(--btn-color);
-  pointer-events: none;
-}
-
-.no-services-found {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 4rem 2rem;
-  
-  & p {
-    font-size: 1.8rem;
-    color: var(--dark-color);
-    font-style: italic;
   }
 
   & .card {
@@ -599,7 +604,7 @@ a.active {
 /* admin  */
 .admin-users,
 .admin-user {
-  /* border: 0.2rem solid var(--btn-color); */
+  border: 0.2rem solid transparent;
 }
 
 .admin-users {
@@ -765,4 +770,219 @@ body tr {
       }
     }
   }
+}
+
+/* Search icon in top right corner */
+.search-icon-container {
+  position: fixed;
+  top: 8rem;
+  right: 3rem;
+  z-index: 1000;
+}
+
+.search-toggle-btn {
+  background: var(--btn-color);
+  border: none;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: white;
+  box-shadow: 0 0.4rem 1.2rem rgba(100, 108, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.search-toggle-btn:hover {
+  background: var(--dark-color);
+  transform: scale(1.1);
+  box-shadow: 0 0.6rem 1.6rem rgba(100, 108, 255, 0.4);
+}
+
+.search-toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.3rem rgba(100, 108, 255, 0.3);
+}
+
+.search-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Search container styles */
+.search-container {
+  position: fixed;
+  top: 14rem;
+  right: 3rem;
+  width: 30rem;
+  z-index: 999;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.6rem;
+  border: 0.2rem solid var(--helper-color);
+  border-radius: 3rem;
+  background-color: var(--bg-color);
+  color: var(--dark-color);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--btn-color);
+  box-shadow: 0 0 0 0.3rem rgba(100, 108, 255, 0.1);
+}
+
+.search-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.no-services-found {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-services-found p {
+  font-size: 1.8rem;
+  color: var(--dark-color);
+  font-style: italic;
+}
+
+/* Desktop optimization */
+@media (min-width: 1200px) {
+  html {
+    font-size: 45%;
+  }
+  
+  .container {
+    max-width: 110rem;
+  }
+  
+  .section-registration {
+    & .container {
+      max-width: 90rem;
+    }
+    
+    & .registration-form {
+      & input {
+        max-width: 30rem;
+      }
+    }
+  }
+  
+  .grid {
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  html {
+    font-size: 42%;
+  }
+  
+  .container {
+    max-width: 100rem;
+  }
+}
+/* FINAL PASSWORD TOGGLE SOLUTION - Override all previous rules */
+.section-registration .registration-form .password-input-container {
+  position: relative !important;
+  display: block !important;
+  width: 80% !important;
+  max-width: 35rem !important;
+}
+
+.section-registration .registration-form .password-input-container input {
+  width: 100% !important;
+  padding: 0.8rem 4.5rem 0.8rem 0.8rem !important;
+  box-sizing: border-box !important;
+  border: 0.1rem solid #ccc !important;
+  border-radius: 0.4rem !important;
+  font-size: 1.4rem !important;
+}
+
+.section-registration .registration-form .password-input-container .password-toggle-btn {
+  position: absolute !important;
+  right: 1.5rem !important;
+  top: 1rem !important;
+  transform: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  cursor: pointer !important;
+  font-size: 1.6rem !important;
+  color: var(--btn-color) !important;
+  padding: 0.2rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  z-index: 1000 !important;
+  outline: 0 !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0.3rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-focus-ring-color: transparent !important;
+}
+
+.section-registration .registration-form .password-input-container .password-toggle-btn:hover {
+  color: var(--dark-color) !important;
+  background-color: rgba(100, 108, 255, 0.1) !important;
+}
+
+.section-registration .registration-form .password-input-container .password-toggle-btn:focus,
+.section-registration .registration-form .password-input-container .password-toggle-btn:focus-visible,
+.section-registration .registration-form .password-input-container .password-toggle-btn:focus-within,
+.section-registration .registration-form .password-input-container .password-toggle-btn:active {
+  outline: 0 !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background-color: rgba(100, 108, 255, 0.1) !important;
+}
+
+/* Additional browser-specific overrides */
+.section-registration .registration-form .password-input-container .password-toggle-btn::-moz-focus-inner {
+  border: 0 !important;
+  outline: none !important;
+  padding: 0 !important;
+}
+
+.section-registration .registration-form .password-input-container .password-toggle-btn::-webkit-focus-ring {
+  outline: none !important;
 }

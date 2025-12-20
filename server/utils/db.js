@@ -7,13 +7,22 @@ const URI= process.env.MONGODB_URI;
 
 const connectdb=async()=>{
     try {
-        console.log(URI);
+        console.log("Attempting to connect to MongoDB...");
+        console.log("MongoDB URI exists:", !!URI);
         
-        await mongoose.connect(URI);
-        console.log("Database connected successfully")
+        if (!URI) {
+            throw new Error("MONGODB_URI environment variable is not set");
+        }
+        
+        await mongoose.connect(URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("Database connected successfully");
     } catch (error) {
-        console.log("Failed to connect to database",error);
-        process.exit(0);
+        console.error("Failed to connect to database:", error.message);
+        console.error("Full error:", error);
+        process.exit(1);
     }
 }
 

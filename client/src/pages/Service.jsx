@@ -5,6 +5,7 @@ import { FaSearch } from "react-icons/fa"
 export const Service=()=>{
     const{ services } = useAuth();
     const [searchTerm, setSearchTerm] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
 
     // Filter services based on search term
     const filteredServices = services.filter(service =>
@@ -13,27 +14,39 @@ export const Service=()=>{
         service.provider.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return(
-        <section className="section-services">  
+        <section className="section-services">
+            {/* Search Icon in Top Right Corner */}
+            <div className="search-icon-container">
+                <button 
+                    className="search-toggle-btn"
+                    onClick={() => setShowSearch(!showSearch)}
+                    aria-label="Toggle search"
+                >
+                    <FaSearch />
+                </button>
+            </div>
+
+            {/* Search Input (shows when icon is clicked) */}
+            {showSearch && (
+                <div className="container">
+                    <div className="search-container">
+                        <div className="search-input-container">
+                            <input
+                                type="text"
+                                placeholder="Search services..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="search-input"
+                                autoFocus
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className="container">
                 <h1 className="main-heading">Services</h1>
             </div>
-            
-            {/* Search Section */}
-            <div className="container">
-                <div className="search-container">
-                    <div className="search-input-container">
-                        <FaSearch className="search-icon" />
-                        <input
-                            type="text"
-                            placeholder="Search services..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="search-input"
-                        />
-                    </div>
-                </div>
-            </div>
-
             <div className="container grid grid-three-cols">
 
                 {
@@ -61,9 +74,11 @@ export const Service=()=>{
                         </div>
                     })
                 ) : (
-                    <div className="no-services-found">
-                        <p>No services found matching your search.</p>
-                    </div>
+                    searchTerm && (
+                        <div className="no-services-found">
+                            <p>No services found matching "{searchTerm}".</p>
+                        </div>
+                    )
                 )
                 }
                 
