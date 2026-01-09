@@ -32,7 +32,6 @@ export const Register=()=>{
     
     const handleSubmit= async(e)=>{
         e.preventDefault();
-        console.log(user);
 
         //conneting frontent with backend
         try {
@@ -44,9 +43,7 @@ export const Register=()=>{
             body:JSON.stringify(user),
         });
 
-
         const res_data= await response.json();
-        console.log("res from server", res_data.message);
 
         //response.ok/response.status===201 etc
         if(response.ok){
@@ -66,7 +63,7 @@ export const Register=()=>{
             toast.error(res_data.extraDetails ? res_data.extraDetails:res_data.message);
         }
         } catch (error) {
-            console.log("Registration error",error);
+            toast.error("Registration failed. Please try again.");
         }
     };
 

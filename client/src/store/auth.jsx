@@ -18,15 +18,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   let isLoggedIn = !!token;
-  console.log("isLoggedIN ", isLoggedIn);
-
 
   // tackling the logout functionality
   const LogoutUser = () => {
     setToken("");
     return localStorage.removeItem("token");
   };
-
 
   // JWT AUTHENTICATION - to get the currently loggedIN user data
   const userAuthentication = async () => {
@@ -41,11 +38,9 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("user data ", data.userData);
         setUser(data.userData);
         setIsLoading(false);
       } else {
-        console.error("Error fetching user data - Status:", response.status);
         // Clear invalid token
         setToken("");
         localStorage.removeItem("token");
@@ -53,7 +48,6 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(false);
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
       setUser(null);
       setIsLoading(false);
     }
@@ -61,7 +55,6 @@ export const AuthProvider = ({ children }) => {
 
   // to fetch the services data from the database
   const getServices = async () => {
-    // TODO: Implement service route in backend
     try {
       const response = await fetch(`${API}/api/data/service`, {
         method: "GET",
@@ -69,11 +62,10 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data.msg);
         setServices(data.msg);
       }
     } catch (error) {
-      console.log(`services frontend error: ${error}`);
+      // Handle error silently or use proper error logging
     }
   };
 

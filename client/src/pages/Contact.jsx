@@ -54,12 +54,10 @@ export const Contact = () => {
       if (response.ok) {
         setContact(defaultContactFormData);
         const data = await response.json();
-        console.log(data);
         toast.success("Message sent successfully!");
       }
     } catch (error) {
       toast.error("Message not sent. Please try again.");
-      console.log(error);
     }
   };
 

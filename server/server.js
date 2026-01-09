@@ -27,30 +27,11 @@ app.use(cors(corsOptions));
 //middleware
 app.use(express.json());//middleware to parse json data in request body
 
-// Health check endpoint
-app.get("/health", (req, res) => {
-    res.json({
-        status: "OK",
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        environment: process.env.NODE_ENV || "development",
-        database: mongoose.connection.readyState === 1 ? "connected" : "disconnected"
-    });
-});
-
-// Root route for API
+// Simple API status endpoint
 app.get("/", (req, res) => {
     res.json({
         message: "ServiceHub API is running!",
-        frontend: process.env.CLIENT_URL || "https://servicehub-frontend.onrender.com",
-        endpoints: {
-            auth: "/api/auth",
-            contact: "/api/form", 
-            services: "/api/data",
-            admin: "/api/admin"
-        },
-        environment: process.env.NODE_ENV || "development",
-        timestamp: new Date().toISOString()
+        status: "OK"
     });
 }); 
 

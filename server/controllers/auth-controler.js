@@ -1,20 +1,6 @@
 const {User}=require("../models/user-model");   
 
 //-----------------------------
-//Home route controller
-//-----------------------------
-
-const home= async(req,res)=>{
-    try {
-        res
-            .status(200)
-            .send("Server is running home route");
-    } catch (error) {
-        console.log("Auth-controller"+error);
-    }
-}
-
-//-----------------------------
 //User registration controller
 //-----------------------------
 
@@ -40,7 +26,6 @@ const register = async (req, res) => {
       userId: userCreated._id.toString(),
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ msg: "Server error", error });
   }
 };
@@ -58,7 +43,7 @@ const login=async(req,res)=>{
         if(!userExist){
             return res.status(400).json({message :"Invalid email or password"});
         }
-        // const user= await bcrypt.compare(password,userExist.password);
+        
         const user= await userExist.comparePassword(password);
 
         if(user){
@@ -76,6 +61,7 @@ const login=async(req,res)=>{
         res.status(500).json("Login Auth-controler "+error);
     }
 }
+
 //-----------------------------
 //user logic to send user data
 //-----------------------------
@@ -83,7 +69,6 @@ const login=async(req,res)=>{
 const user = async(req,res) =>{
   try {
     const userData=req.user;
-    console.log(userData);
     return res.status(200).json({userData})
     
   } catch (error) {
@@ -91,6 +76,4 @@ const user = async(req,res) =>{
   }
 }
 
-
-
-module.exports={home,register,login,user};
+module.exports={register,login,user};

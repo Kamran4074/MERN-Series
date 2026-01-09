@@ -28,7 +28,6 @@ export const Login=()=>{
     }
     const handleSubmit= async (e)=>{
         e.preventDefault();
-        console.log(user);
 
         //connecting with backend
         try {
@@ -41,7 +40,6 @@ export const Login=()=>{
             });
 
             const res_data = await response.json();
-            console.log("Login response:", res_data);
 
             if(response.ok){
                 //storing token
@@ -61,11 +59,9 @@ export const Login=()=>{
 
             } else {
                 toast.error(res_data.extraDetails ? res_data.extraDetails:res_data.message);
-                console.log("Invalid Crential");
             }
 
         } catch (error) {
-            console.error("Login error:", error);
             toast.error("Something went wrong. Please try again.");
         }
     }

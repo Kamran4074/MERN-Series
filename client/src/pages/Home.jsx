@@ -5,7 +5,6 @@ export const Home=()=>{
     return(
        <>
         <main>
-                        {/* section one */}
             <section className="section-hero">
                 <div className="container grid grid-two-cols">
                     <div className="hero-content">
@@ -17,10 +16,6 @@ export const Home=()=>{
                             digital transformation strategies to help your company thrive in 
                             the digital age.
                         </p>
-                        {/* <p>
-                            Our team of expert developers and consultants are dedicated to 
-                            delivering high-quality solutions tailored to your unique business needs.
-                        </p> */}
                         <div className="btn btn-group">
                             <a href="/contact">
                                 <button className="btn">connect now</button>
@@ -41,32 +36,7 @@ export const Home=()=>{
                 </div>
             </section>
 
-                        {/* second section */}
-
             <Analytics />
-            
-            {/* <section className="section-analytics">
-                <div className="container grid grid-four-cols">
-                    <div className="div1">
-                        <h2>500+</h2>
-                        <p>Projects Completed</p>
-                    </div>
-                    <div className="div1">
-                        <h2>200+</h2>
-                        <p>Happy Clients</p>
-                    </div>
-                    <div className="div1">
-                        <h2>50+</h2>
-                        <p>Expert Team Members</p>
-                    </div>
-                    <div className="div1">
-                        <h2>10+</h2>
-                        <p>Years of Experience</p>
-                    </div>
-                </div>
-            </section> */}
-
-                        {/* third section */}
 
             <section className="section-hero">
                 <div className="container grid grid-two-cols">
